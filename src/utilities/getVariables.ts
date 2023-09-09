@@ -79,10 +79,9 @@ const processAliasModes = (variables) => {
     for (let i = 0; i < aliasModes.length; i++) {
       const modeBasedVariable = { ...variable }
       const nameParts = modeBasedVariable.name.split('/');
-
       nameParts.splice(1, 0, aliasModes[i].name)
 
-      modeBasedVariable.values = modeBasedVariable.values.replace(`{${aliasName}.`, `{${aliasName}.${aliasModes[i].name}.`)
+      modeBasedVariable.values = modeBasedVariable.values.replace(`${aliasName.toLowerCase()}.`, `${aliasName.toLowerCase()}.${aliasModes[i].name.toLowerCase().replace(/\s+/g, '')}.`)
       modeBasedVariable.name = nameParts.join('/')
 
       collector.push(modeBasedVariable)
